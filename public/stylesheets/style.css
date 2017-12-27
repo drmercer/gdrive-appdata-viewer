@@ -1,3 +1,18 @@
+a {
+	color: green;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.clientId {
+	display: inline-block;
+	max-width: 46ch;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	color: darkblue;
+}
+
 .breadcrumb {
 	display: inline;
 	margin: 2px;

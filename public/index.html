@@ -9,10 +9,26 @@
 	</head>
 	<body ng-app="myApp" ng-controller="myCtrl">
 		Welcome to Google Drive App Data Inspector.
+		<div ng-show="!clientId">
+			<ol>
+				<li>Add <code>TODO: host name to your console thingy</code>.
+				<li>Enter your Google Drive Client ID below.
+			</ol>
+			<form ng-submit="setClientId(wipClientId)">
+				<input type="text" ng-model="wipClientId" placeholder="Google Drive Client ID"/>
+				<button type="submit">Set Client ID</button>
+			</form>
+		</div>
+		<div ng-show="clientId">
+			Client ID set to <code class="clientId">{{clientId}}</code>.
+			<a onclick="window.location.reload()">Reload the page</a> to use a
+			different client ID.
+		</div>
+
 		<div ng-show="initializing">
 			Loading...
 		</div>
-		<div ng-show="!initializing && !signedIn">
+		<div ng-show="!initializing && !signedIn && clientId">
 			You are not signed in.
 			<button ng-click="signIn()">Sign In</button>
 		</div>

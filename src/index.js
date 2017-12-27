@@ -1,18 +1,13 @@
 var gds = require('gdrive-simple');
 
-var gdsInit = gds.init({
-    clientId: "262230741042-6pk925ik2nrmpkp7ekb35r149p1om5t9.apps.googleusercontent.com",
-    scopes: [
-        "https://www.googleapis.com/auth/drive.appdata",
-    ],
-});
+const DEMO_CLIENT_ID = "262230741042-6pk925ik2nrmpkp7ekb35r149p1om5t9.apps.googleusercontent.com";
 
 angular
 .module('myApp', [])
 .controller('myCtrl', myCtrl);
 
 function myCtrl($scope) {
-	$scope.initializing = true;
+	$scope.wipClientId = DEMO_CLIENT_ID;
 
 	function load(promise) {
 		$scope.loading = true;
@@ -23,7 +18,18 @@ function myCtrl($scope) {
 		});
 	}
 
-	gdsInit.then(() => {
+	$scope.setClientId = id => {
+		gds.init({
+		    clientId: id,
+		    scopes: [
+		        "https://www.googleapis.com/auth/drive.appdata",
+		    ],
+		}).then(() => {
+			$scope.clientId = id
+		}).then(onGdsInitComplete);
+	};
+
+	function onGdsInitComplete() {
 		$scope.initializing = false;
 		$scope.$apply();
 
@@ -37,7 +43,7 @@ function myCtrl($scope) {
 
 			$scope.$apply();
 		});
-	});
+	}
 
 	$scope.signIn = gds.signIn;
 	$scope.signOut = gds.signOut;
