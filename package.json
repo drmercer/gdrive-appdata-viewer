@@ -4,6 +4,7 @@
   "description": "A web app for inspecting hidden app data stored in Google Drive",
   "scripts": {
     "start": "webpack-dev-server",
+    "deploy": "npm run build && ./deploy.sh",
     "build": "webpack"
   },
   "repository": {
