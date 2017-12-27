@@ -11,8 +11,14 @@
 		<header>Welcome to Google Drive App Data Inspector.</header>
 		<div ng-show="!clientId">
 			<ol>
-				<li>Add <code>TODO: host name to your console thingy</code>.
-				<li>Enter your Google Drive Client ID below.
+				<li>
+					Add <code>{{hostname}}</code> as an authorized JavaScript origin on
+					<a href="https://console.developers.google.com/apis/credentials" target="_blank" >
+					a web app client ID</a> for your Google-Drive-powered app.
+				</li>
+				<li>
+					Enter the client ID below.
+				</li>
 			</ol>
 			<form ng-submit="setClientId(wipClientId)">
 				<input type="text" ng-model="wipClientId" placeholder="Google Drive Client ID"/>
@@ -21,7 +27,7 @@
 		</div>
 		<div ng-show="clientId">
 			Client ID set to <code class="clientId">{{clientId}}</code>.
-			<a onclick="window.location.reload()">Reload the page</a> to use a
+			<a href=".">Reload the page</a> to use a
 			different client ID.
 		</div>
 
