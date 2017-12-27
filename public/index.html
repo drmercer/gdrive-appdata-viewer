@@ -43,16 +43,16 @@
 				<button ng-show="stack.length > 1" ng-click="goUp()">Go Up</button>
 			</div>
 			<section class="part">
-				<div ng-repeat="f in folders">
+				<div ng-repeat="f in folders | orderBy:'name'">
 					<a ng-click="enterFolder(f)">Folder: {{f.name}}</a>
 				</div>
-				<div ng-show="!folders.length">
+				<div ng-show="!folders.length" class="nothingHere">
 					No folders.
 				</div>
-				<div ng-repeat="f in files">
+				<div ng-repeat="f in files | orderBy:'name'">
 					File: {{f.name}}
 				</div>
-				<div ng-show="!files.length">
+				<div ng-show="!files.length" class="nothingHere">
 					No files.
 				</div>
 			</section>

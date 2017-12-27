@@ -79,3 +79,7 @@ body > :not(header) {
 	font-size: 3em;
 	opacity: .7;
 }
+
+.nothingHere {
+	opacity: .7;
+}
