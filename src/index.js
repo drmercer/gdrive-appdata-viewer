@@ -84,7 +84,7 @@ function myCtrl($scope) {
 	}
 
 	$scope.openFile = file =>
-		load(file.read())
+		load(file.read({raw: true}))
 				.then(contents => openContentsInNewTab(contents, file.mimeType, file.name))
 				.catch(err => showErr(err && err.message));
 
@@ -95,10 +95,10 @@ function myCtrl($scope) {
 }
 
 function openContentsInNewTab(contents, type, name) {
-	var blob = (contents instanceof Blob)     ? contents :
-	           (type === "application/json")  ? new Blob([JSON.stringify(contents, null, 2)], {type}) :
-						 (typeof contents === "string") ? new Blob([contents], {type})
-						                                : null;
+	var blob = (contents instanceof Blob) ? contents :
+		/* */(typeof contents === "string") ? new Blob([contents], {type}) :
+		/* */ (type === "application/json") ? new Blob([JSON.stringify(contents, null, 2)], {type})
+		/* ^ to protect alignemnt */        : null;
 	if (!blob) {
 		throw new Error(`Unrecognized type: ${type} (Contents: ${JSON.stringify(contents)})`);
 	}
