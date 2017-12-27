@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A web app for inspecting hidden app data stored in Google Drive",
   "scripts": {
+    "start": "webpack-dev-server",
     "build": "webpack"
   },
   "repository": {
@@ -20,6 +21,7 @@
   },
   "homepage": "https://github.com/drmercer/gdrive-appdata-viewer#readme",
   "devDependencies": {
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
   }
 }
