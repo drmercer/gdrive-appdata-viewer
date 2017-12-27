@@ -12,12 +12,36 @@ angular
 .controller('myCtrl', myCtrl);
 
 function myCtrl($scope) {
-	$scope.test = "Hello world!";
+	$scope.initializing = true;
+
 	gdsInit.then(() => {
-    gds.listenForSignInChange(isSignedIn => {
-			console.log("isSignedIn:", isSignedIn);
-		});
-		$scope.test = "GDS initialized";
+		$scope.initializing = false;
 		$scope.$apply();
+
+    gds.listenForSignInChange(isSignedIn => {
+			$scope.signedIn = isSignedIn;
+			$scope.stack = [];
+
+			if (isSignedIn) {
+				$scope.enterFolder(gds.getAppDataFolder());
+			}
+
+			$scope.$apply();
+		});
 	});
+
+	$scope.signIn = gds.signIn;
+	$scope.signOut = gds.signOut;
+
+	$scope.enterFolder = folder => {
+		Promise.all([
+			folder.listFiles({getAll:true}),
+			folder.listFolders({getAll:true}),
+		]).then(data => {
+			$scope.stack.push(folder);
+			$scope.files = data[0].files;
+			$scope.folders = data[1].files;
+			$scope.$apply();
+		});
+	};
 }

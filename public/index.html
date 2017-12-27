@@ -7,6 +7,26 @@
 		<script src="build/bundle.js" charset="utf-8"></script>
 	</head>
 	<body ng-app="myApp" ng-controller="myCtrl">
-		Welcome to Google Drive App Data Inspector. {{test}}
+		Welcome to Google Drive App Data Inspector.
+		<div ng-show="initializing">
+			Loading...
+		</div>
+		<div ng-show="!initializing && !signedIn">
+			You are not signed in.
+			<button ng-click="signIn()">Sign In</button>
+		</div>
+		<div ng-show="!initializing && signedIn">
+			You are signed in!
+			<button ng-click="signOut()">Sign Out</button>
+
+			<section>
+				<div ng-repeat="f in folders">
+					Folder: {{f.name}}
+				</div>
+				<div ng-repeat="f in files">
+					File: {{f.name}}
+				</div>
+			</section>
+		</div>
 	</body>
 </html>
