@@ -7,7 +7,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
 		<script src="build/bundle.js" charset="utf-8"></script>
 	</head>
-	<body ng-app="myApp" ng-controller="myCtrl">
+	<body ng-app="myApp" ng-controller="myCtrl" ng-class="{loading: loading}">
 		<header>Welcome to Google Drive App Data Inspector.</header>
 		<div ng-show="!clientId">
 			<ol>
@@ -38,7 +38,7 @@
 			You are not signed in.
 			<button ng-click="signIn()">Sign In</button>
 		</div>
-		<div class="part" ng-show="!initializing && signedIn" ng-class="{loading: loading}">
+		<div class="part" ng-show="!initializing && signedIn">
 			You are signed in!
 			<button ng-click="signOut()">Sign Out</button>
 

@@ -19,20 +19,24 @@ function myCtrl($scope) {
 		});
 	}
 
+	window.addEventListener('beforeunload', function() {
+		$scope.loading = true;
+		$scope.$apply();
+	});
+
 	$scope.setClientId = id => {
-		gds.init({
+		load(gds.init({
 		    clientId: id,
 		    scopes: [
 		        "https://www.googleapis.com/auth/drive.appdata",
 		    ],
 		}).then(() => {
 			$scope.clientId = id
-		}).then(onGdsInitComplete);
+		}).then(onGdsInitComplete));
 	};
 
 	function onGdsInitComplete() {
 		$scope.initializing = false;
-		$scope.$apply();
 
     gds.listenForSignInChange(isSignedIn => {
 			$scope.signedIn = isSignedIn;
@@ -46,7 +50,7 @@ function myCtrl($scope) {
 		});
 	}
 
-	$scope.signIn = gds.signIn;
+	$scope.signIn = () => load(gds.signIn());
 	$scope.signOut = gds.signOut;
 
 	$scope.enterFolder = folder => {
