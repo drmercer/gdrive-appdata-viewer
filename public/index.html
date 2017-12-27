@@ -10,6 +10,9 @@
 	</head>
 	<body ng-app="myApp" ng-controller="myCtrl" ng-class="{loading: loading}">
 		<header>Welcome to Google Drive App Data Inspector.</header>
+
+		<div ng-show="errorMessage" class="errorMessage">{{errorMessage}}</div>
+
 		<div ng-show="!clientId">
 			<ol>
 				<li>
@@ -57,7 +60,7 @@
 					No folders.
 				</div>
 				<div ng-repeat="f in files | orderBy:'name'">
-					File: {{f.name}}
+					File: {{f.name}} <a ng-click="openFile(f)">Open</a>
 				</div>
 				<div ng-show="!files.length" class="nothingHere">
 					No files.

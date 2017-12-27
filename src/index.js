@@ -11,11 +11,15 @@ function myCtrl($scope) {
 	$scope.siteOrigin = window.location.origin;
 
 	function load(promise) {
+		$scope.errorMessage = ""
 		$scope.loading = true;
 		return promise.then(result => {
 			$scope.loading = false;
 			$scope.$apply();
 			return result;
+		}, err => {
+			$scope.loading = false;
+			showErr(err && err.message)
 		});
 	}
 
@@ -78,4 +82,26 @@ function myCtrl($scope) {
 			$scope.stack.pop();
 		}))
 	}
+
+	$scope.openFile = file =>
+		load(file.read())
+				.then(contents => openContentsInNewTab(contents, file.mimeType, file.name))
+				.catch(err => showErr(err && err.message));
+
+	function showErr(msg) {
+		$scope.errorMessage = "" + msg;
+		$scope.$apply();
+	}
+}
+
+function openContentsInNewTab(contents, type, name) {
+	var blob = (contents instanceof Blob)     ? contents :
+	           (type === "application/json")  ? new Blob([JSON.stringify(contents, null, 2)], {type}) :
+						 (typeof contents === "string") ? new Blob([contents], {type})
+						                                : null;
+	if (!blob) {
+		throw new Error(`Unrecognized type: ${type} (Contents: ${JSON.stringify(contents)})`);
+	}
+	var url = URL.createObjectURL(blob);
+	window.open(url, name);
 }
