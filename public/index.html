@@ -11,7 +11,7 @@
 	<body ng-app="myApp" ng-controller="myCtrl" ng-class="{loading: loading}">
 		<header>Welcome to Google Drive App Data Inspector.</header>
 
-		<div ng-show="errorMessage" class="errorMessage">{{errorMessage}}</div>
+		<div ng-show="errorMessage" class="errorMessage">Error: {{errorMessage}} <a ng-click="errorMessage=''">Close</a></div>
 
 		<div ng-show="!clientId">
 			<ol>
@@ -21,7 +21,7 @@
 					a web app client ID</a> for your Google-Drive-powered app.
 				</li>
 				<li>
-					Enter the client ID below.
+					Enter your client ID below. (A demo client ID is pre-filled.)
 				</li>
 			</ol>
 			<form ng-submit="setClientId(wipClientId)">

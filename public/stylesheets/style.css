@@ -45,13 +45,34 @@ body > :not(header) {
 	margin: 32px;
 }
 
+.errorMessage {
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	margin: 0;
+	box-sizing: border-box;
+	padding: 20px;
+	text-align: center;
+	background-color: red;
+}
+
+.errorMessage a {
+	font-weight: bold;
+	color: inherit;
+	margin: 0 10px;
+	float: right;
+}
+
+code {
+	color: lightgreen;
+}
+
 .clientId {
 	display: inline-block;
 	max-width: 46ch;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-	color: lightgreen;
 }
 
 .part {
