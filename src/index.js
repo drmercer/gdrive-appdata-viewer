@@ -34,14 +34,30 @@ function myCtrl($scope) {
 	$scope.signOut = gds.signOut;
 
 	$scope.enterFolder = folder => {
-		Promise.all([
+		showFolderContents(folder)
+		.then(() => {
+			$scope.stack.push(folder);
+			$scope.$apply();
+		})
+	};
+
+	function showFolderContents(folder) {
+		return Promise.all([
 			folder.listFiles({getAll:true}),
 			folder.listFolders({getAll:true}),
 		]).then(data => {
-			$scope.stack.push(folder);
 			$scope.files = data[0].files;
 			$scope.folders = data[1].files;
-			$scope.$apply();
 		});
-	};
+	}
+
+	$scope.goUp = () => {
+		const dest = $scope.stack.slice(-2)[0];
+		showFolderContents(dest)
+		.then(() => {
+			// Remove last element
+			$scope.stack.pop();
+			$scope.$apply();
+		})
+	}
 }
