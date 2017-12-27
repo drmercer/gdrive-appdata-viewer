@@ -1,7 +1,48 @@
+body {
+	background-color: #004400;
+	color: white;
+	font-family: 'Tachoma', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
 a {
-	color: green;
+	color: lime;
 	text-decoration: underline;
 	cursor: pointer;
+}
+
+button, input {
+	border: 1px solid currentcolor;
+	border-radius: 5px;
+	background: none;
+	color: inherit;
+	font-size: 1em;
+	padding: 4px;
+}
+
+button {
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: rgba(0, 255, 0, .3);
+}
+
+input {
+	background-color: rgba(255, 255, 255, .2);
+	outline: none;
+}
+
+header {
+	background-color: green;
+	color: white;
+	padding: 30px;
+	font-size: 1.7em;
+}
+
+body > :not(header) {
+	margin: 32px;
 }
 
 .clientId {
@@ -10,13 +51,16 @@ a {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-	color: darkblue;
+	color: lightgreen;
+}
+
+.part {
+	margin: 10px;
 }
 
 .breadcrumb {
 	display: inline;
 	margin: 2px;
-	border: 1px solid lightgray;
 }
 
 .loading > * {
