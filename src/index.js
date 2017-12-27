@@ -8,7 +8,7 @@ angular
 
 function myCtrl($scope) {
 	$scope.wipClientId = DEMO_CLIENT_ID;
-	$scope.hostname = window.location.host;
+	$scope.siteOrigin = window.location.origin;
 
 	function load(promise) {
 		$scope.loading = true;
