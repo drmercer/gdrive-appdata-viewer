@@ -1,0 +1,25 @@
+{
+  "name": "gdrive-appdata-viewer",
+  "version": "1.0.0",
+  "description": "A web app for inspecting hidden app data stored in Google Drive",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drmercer/gdrive-appdata-viewer.git"
+  },
+  "keywords": [
+    "Google Drive",
+    "gdrive"
+  ],
+  "author": "Dan Mercer",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/drmercer/gdrive-appdata-viewer/issues"
+  },
+  "homepage": "https://github.com/drmercer/gdrive-appdata-viewer#readme",
+  "devDependencies": {
+    "webpack": "^3.10.0"
+  }
+}
