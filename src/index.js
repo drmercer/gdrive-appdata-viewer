@@ -14,6 +14,15 @@ angular
 function myCtrl($scope) {
 	$scope.initializing = true;
 
+	function load(promise) {
+		$scope.loading = true;
+		return promise.then(result => {
+			$scope.loading = false;
+			$scope.$apply();
+			return result;
+		});
+	}
+
 	gdsInit.then(() => {
 		$scope.initializing = false;
 		$scope.$apply();
@@ -34,11 +43,10 @@ function myCtrl($scope) {
 	$scope.signOut = gds.signOut;
 
 	$scope.enterFolder = folder => {
-		showFolderContents(folder)
+		load(showFolderContents(folder)
 		.then(() => {
 			$scope.stack.push(folder);
-			$scope.$apply();
-		})
+		}))
 	};
 
 	function showFolderContents(folder) {
@@ -53,11 +61,10 @@ function myCtrl($scope) {
 
 	$scope.goUp = () => {
 		const dest = $scope.stack.slice(-2)[0];
-		showFolderContents(dest)
+		load(showFolderContents(dest)
 		.then(() => {
 			// Remove last element
 			$scope.stack.pop();
-			$scope.$apply();
-		})
+		}))
 	}
 }

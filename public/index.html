@@ -16,7 +16,7 @@
 			You are not signed in.
 			<button ng-click="signIn()">Sign In</button>
 		</div>
-		<div ng-show="!initializing && signedIn">
+		<div ng-show="!initializing && signedIn" ng-class="{loading: loading}">
 			You are signed in!
 			<button ng-click="signOut()">Sign Out</button>
 
@@ -30,8 +30,14 @@
 				<div ng-repeat="f in folders">
 					<a ng-click="enterFolder(f)">Folder: {{f.name}}</a>
 				</div>
+				<div ng-show="!folders.length">
+					No folders.
+				</div>
 				<div ng-repeat="f in files">
 					File: {{f.name}}
+				</div>
+				<div ng-show="!files.length">
+					No files.
 				</div>
 			</section>
 		</div>

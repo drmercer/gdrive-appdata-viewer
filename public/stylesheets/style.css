@@ -3,3 +3,20 @@
 	margin: 2px;
 	border: 1px solid lightgray;
 }
+
+.loading > * {
+	opacity: .5;
+	pointer-events: none;
+}
+
+.loading::after {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	content: "LOADING";
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 3em;
+	opacity: .7;
+}
