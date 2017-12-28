@@ -37,6 +37,7 @@ input {
 header {
 	background-color: green;
 	color: white;
+	font-weight: bold;
 	padding: 30px;
 	font-size: 1.7em;
 }
