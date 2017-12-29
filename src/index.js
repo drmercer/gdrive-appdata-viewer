@@ -19,7 +19,8 @@ function myCtrl($scope) {
 			return result;
 		}, err => {
 			$scope.loading = false;
-			showErr(err && err.message)
+			showErr(err);
+			throw err;
 		});
 	}
 
@@ -86,10 +87,12 @@ function myCtrl($scope) {
 	$scope.openFile = file =>
 		load(file.read({raw: true}))
 				.then(contents => openContentsInNewTab(contents, file.mimeType, file.name))
-				.catch(err => showErr(err && err.message));
+				.catch(err => showErr(err));
 
-	function showErr(msg) {
-		$scope.errorMessage = "" + msg;
+	function showErr(err) {
+		const msg = (err && err.message) || "An unknown error occurred.";
+		console.error(msg);
+		$scope.errorMessage = msg;
 		$scope.$apply();
 	}
 }
